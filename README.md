@@ -62,8 +62,30 @@ Deny from all
 
 ## Bật nén GZIP cho các đuôi file phổ biến
 
-Bao gồm: HTML, CSS, JS, TXT và RSS
+- Bạn nên bật gzip compression cho các file tĩnh, chẳng hạn như file HTML, CSS, và JavaScript.
+- Bạn nên tắt gzip compression cho các file động, chẳng hạn như file PHP.
+- Bạn nên kiểm tra xem trình duyệt của người dùng có hỗ trợ gzip compression hay không.
 
 ```
-AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/x-javascript application/xml application/rss+xml
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+```
+
+Một cách khác là force theo định dạng sử dụng `ForceType`:
+
+```
+ForceType application/x-gzip .html
+ForceType application/x-gzip .css
+ForceType application/x-gzip .js
+ForceType application/x-gzip .jpg
+ForceType application/x-gzip .jpeg
+ForceType application/x-gzip .png
+ForceType application/x-gzip .svg
 ```
