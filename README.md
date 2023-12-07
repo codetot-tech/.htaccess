@@ -59,3 +59,11 @@ Order allow,deny
 Deny from all
 </FilesMatch>
 ```
+
+## Bật nén GZIP cho các đuôi file phổ biến
+
+Bao gồm: HTML, CSS, JS, TXT và RSS
+
+```
+AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/x-javascript application/xml application/rss+xml
+```
